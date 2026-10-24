@@ -427,7 +427,7 @@ function serverDesc(){
     else if(M.sport==='pb'&&M.pbScoring==='sideout') idx=M.pbServerPlayer;
     else if(M.sport==='pb') idx=M.pos[s][serveCourt()==='R'?0:1];
     else if(M.sport==='ten'&&!M.tb) idx=M.tenNextSrv[s];
-    if(idx!==null) who+=` ${idx+1} 號`;
+    if(idx!==null) who+=` P${idx+1}`;
   }
   return who;
 }
@@ -530,14 +530,14 @@ function courtSVG(){
   s+=line(-mg*0.42,N-nb*0.6,W+mg*0.42,N-nb*0.6,nb*0.55,'rgba(255,255,255,.85)');
   s+=`<circle cx="${-mg*0.42}" cy="${N}" r="${nb*1.5}" fill="rgba(13,18,16,.9)"/>`;
   s+=`<circle cx="${W+mg*0.42}" cy="${N}" r="${nb*1.5}" fill="rgba(13,18,16,.9)"/>`;
-  // 站位
-  const R=L*0.022+0.12;
+  // 站位:所有選手都標示 P1 / P2
+  const R=L*0.026+0.14;
   for(const p of playerSpots()){
     const col=p.t===0?'var(--t0)':'var(--t1)';
     s+=`<g filter="url(#pSh)">`;
-    if(p.srv)s+=`<circle cx="${p.x}" cy="${p.y}" r="${R*1.5}" fill="none" stroke="#fff" stroke-width="${R*0.2}" opacity=".95"/>`;
-    s+=`<circle cx="${p.x}" cy="${p.y}" r="${R}" fill="${col}" stroke="rgba(255,255,255,.9)" stroke-width="${R*0.12}"/>`;
-    if(isDbl())s+=`<text x="${p.x}" y="${p.y+R*0.04}" fill="#fff" font-size="${R*1.15}" text-anchor="middle" dominant-baseline="central" font-family="Barlow Condensed,sans-serif" font-weight="700">${p.n+1}</text>`;
+    if(p.srv)s+=`<circle cx="${p.x}" cy="${p.y}" r="${R*1.42}" fill="none" stroke="#fff" stroke-width="${R*0.17}" opacity=".95"/>`;
+    s+=`<circle cx="${p.x}" cy="${p.y}" r="${R}" fill="${col}" stroke="rgba(255,255,255,.9)" stroke-width="${R*0.1}"/>`;
+    s+=`<text x="${p.x}" y="${p.y+R*0.06}" fill="#fff" font-size="${R*0.92}" text-anchor="middle" dominant-baseline="central" font-family="'Barlow Condensed',sans-serif" font-weight="700">P${p.n+1}</text>`;
     s+=`</g>`;
   }
   // 落點標記
